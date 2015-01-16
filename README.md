@@ -1,4 +1,4 @@
-# IQNOMY_Magento_extension
+# IQNOMY Magento extension
 
 A Magento extension integrates IQNOMY's Liquid platform into Magento
 ========
