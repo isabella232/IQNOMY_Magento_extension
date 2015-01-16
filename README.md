@@ -20,8 +20,8 @@ Installation
 Contribute
 ----------
 
-- Issue Tracker: github.com/$project/$project/issues
-- Source Code: github.com/$project/$project
+- Issue Tracker: github.com/christianvriens/IQNOMY_Magento_extension/issues
+- Source Code: github.com/christianvriens/IQNOMY_Magento_extension/
 
 Support
 -------
