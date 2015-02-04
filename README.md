@@ -28,7 +28,6 @@ Support
 If you are having issues, please let us know.
 support@iqnomy.com
 - [Getting started](http://support.iqnomy.com/index.php?title=IQNOMY_Magento_extension "Getting started")
-- [Dutch description](http://support.iqnomy.com/index.php?title=IQNOMY_Magento_extensie "Dutch getting started")
 
 License
 -------
