@@ -1,0 +1,54 @@
+<?php
+/**
+ * @category    IQNOMY
+ * @package     IQNOMY_Extension
+ * @copyright   Copyright (c) 2013-2015 IQNOMY (http://www.iqnomy.com)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+?>
+<div class="grid">
+    <div class="hor-scroll">
+        <table cellspacing="0" class="data">
+            <colgroup>
+                <col width="50">
+                <col>
+                <col width="90">
+                <col width="150">
+                <col>
+                <col width="50">
+            </colgroup>
+            <thead>
+                <tr class="headings">
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("ID"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Name"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Enabled?"); ?></span></span></th>
+                    <th title="<?php echo Mage::helper('iqnomy_extension')->__("If there is no profile of the visitor, this type will be used to select content."); ?>"><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Escalation type"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Selection methods"); ?></span></span></th>
+                    <th class=" no-link last"><span class="nobr"><?php echo Mage::helper('iqnomy_extension')->__("Action"); ?></span></th>
+                </tr>
+            </thead> 
+            <tbody>
+                <?php if($this->getCollection() != null && $this->getCollection()->count() > 0) { ?>
+                    <?php $even = true; ?>
+                    <?php foreach($this->getCollection() as $row) { ?>
+                        <tr title="<?php echo Mage::helper('iqnomy_extension')->__("Edit container: ").$row->getName(); ?>" class="pointer<?php if($even) { echo " even"; } ?>" onclick="location.href = '<?php echo $this->getRowUrl($row); ?>';">
+                            <td class="a-right"><?php echo $row->getId(); ?></td>
+                            <td style='min-width: 200px;'><?php echo $row->getName(); ?></td>
+                            <td class="a-center"><input type="checkbox" disabled="disabled" class="disabled" <?php if($row->getIsEnabled()) { echo "checked"; } ?>></td>
+                            <td title="<?php echo Mage::helper('iqnomy_extension')->__("If there is no profile of the visitor, this type will be used to select content."); ?>"><?php echo $row->getFallbackTypeViewable(); ?></td>
+                            <td><?php echo $row->getSelectionMethodsViewable(); ?></td>
+                            <td class="a-center last">
+                                <a href="<?php echo $this->getRowUrl($row); ?>"><?php echo Mage::helper('iqnomy_extension')->__("Edit"); ?></a>
+                            </td>
+                        </tr>
+                        <?php $even = !$even; ?>
+                    <?php } ?>
+                <?php } else { ?>
+                    <tr class="even">
+                        <td class="empty-text a-center" colspan="6"><?php echo Mage::helper('iqnomy_extension')->__("No containers found."); ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>

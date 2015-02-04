@@ -1,0 +1,81 @@
+<?php
+/**
+ * @category    IQNOMY
+ * @package     IQNOMY_Extension
+ * @copyright   Copyright (c) 2013-2015 IQNOMY (http://www.iqnomy.com)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+?>
+<table cellspacing="0" class="form-list">
+    <tbody>
+        <tr>
+            <td class="label"><?php echo Mage::helper('iqnomy_extension')->__("Pages"); ?></td>
+            <td colspan="10" class="grid tier">
+                <table cellspacing="0" class="data border">
+                    <colgroup>
+                        <col width="200">
+                        <?php if($this->getIsAdvanced()) { ?><col><?php } ?>
+                        <col width="1">
+                    </colgroup>
+                    <thead>
+                        <tr class="headings">
+                            <th><?php echo Mage::helper('iqnomy_extension')->__("Page URL"); ?></th>
+                            <?php if($this->getIsAdvanced()) { ?>
+                            <th><?php echo Mage::helper('iqnomy_extension')->__("Maximal amount of results."); ?></th>
+                            <?php } ?>
+                            <th class="last"><?php echo Mage::helper('iqnomy_extension')->__("Action"); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody id="container_pages">
+                        <?php foreach($this->getContainerplacements() as $placement) { ?>
+                            <tr>
+                                <td><input class="input-text" type="text" name="container_pages_urls[]" value="<?php echo $placement["matchUrl"]; ?>"><?php if(!$this->getIsAdvanced()) { ?><input class="input-text" style="display: none;" type="text" name="container_pages_max_results[]" value="<?php echo $this->getMaxResults(); ?>"><?php } ?></td>
+                                <?php if($this->getIsAdvanced()) { ?>
+                                <td><input class="input-text" type="text" name="container_pages_max_results[]" value="<?php echo $placement["maxResults"]; ?>"></td>
+                                <?php } ?>
+                                <td class="last a-right">
+                                    <button type="button" style="float: left;" class="scalable delete icon-btn delete-product-option" onclick="return containerPagesControl.deleteItem(event);"><span><?php echo Mage::helper('iqnomy_extension')->__("Delete"); ?></span></button>
+                                    <?php if(!$this->getIsAdvanced()) { ?><button type="button" class="scalable" onclick="window.open('<?php echo $this->getPreviewUrl($placement["matchUrl"]); ?>');"><span><?php echo "Preview"; ?></span></button><?php } ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="a-right">
+                                <button type="button" class="scalable add" onclick="return containerPagesControl.addItem();">
+                                    <span><?php echo Mage::helper('iqnomy_extension')->__("Add page"); ?></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <p class="note" id="note_height"><span><?php echo Mage::helper('iqnomy_extension')->__("Enter the pages on which this content could appear. Warning: You can only enter pages which at least have been visited once while this plugin was installed. Please don't forget to click on save afterwards in the upper-right corner of this page."); ?></span></p>
+                <script type="text/javascript">
+                //<![CDATA[
+                var pathItems = window.location.href.split( '/' );
+                
+                var containerPagesControl = {
+                    template: '<td><input class="input-text" type="text" name="container_pages_urls[]" value="<?php echo Mage::helper('iqnomy_extension')->getBaseUrl(); ?>"><?php if(!$this->getIsAdvanced()) { ?><input class="input-text" style="display: none;" type="text" name="container_pages_max_results[]" value="<?php echo $this->getMaxResults(); ?>"><?php } ?></td>'
+                    <?php if($this->getIsAdvanced()) { ?> + '<td><input class="input-text" type="text" name="container_pages_max_results[]"></td>' <?php } ?>
+                    + '<td class="last a-right"><button style="float: left;" type="button" class="scalable delete icon-btn delete-product-option" onclick="return containerPagesControl.deleteItem(event);"><span>Delete</span></button></td>',
+                    tbody: document.getElementById("container_pages"),
+                    addItem : function () {
+                        var node = document.createElement("tr");
+                        node.innerHTML = this.template;
+                        
+                        this.tbody.appendChild(node);
+                        return false;
+                    },
+                    deleteItem: function(event) {
+                        var tr = Event.findElement(event, 'tr');
+                        tr.parentElement.removeChild(tr);
+                        return false;
+                    }
+                };
+                //]]>
+                </script>
+            </td>
+        </tr>
+    </tbody>
+</table>

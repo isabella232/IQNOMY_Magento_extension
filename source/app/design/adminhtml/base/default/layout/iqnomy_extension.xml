@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @category    IQNOMY
+ * @package     IQNOMY_Extension
+ * @copyright   Copyright (c) 2013-2015 IQNOMY (http://www.iqnomy.com)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+-->
+<layout>
+    <adminhtml_iqnomy_index>
+        <reference name="content">
+	    <block type="adminhtml/store_switcher" name="store_switcher" template="iqnomy_extension/store/switcher.phtml" />
+            <block type="iqnomy_extension/adminhtml_control" name="iqnomy.control" template="iqnomy_extension/control.phtml" />
+        </reference>
+    </adminhtml_iqnomy_index>
+    
+    <adminhtml_case_index>
+        <reference name="content">
+            <block type="iqnomy_extension/adminhtml_case" name="iqnomy.case" />
+        </reference>
+    </adminhtml_case_index>
+    <adminhtml_case_save>
+        <reference name="content">
+            <block type="iqnomy_extension/adminhtml_case" name="iqnomy.case" />
+        </reference>
+    </adminhtml_case_save>
+        
+    <adminhtml_container_index>
+        <reference name="content">
+            <block type="iqnomy_extension/adminhtml_container" name="iqnomy.container" />
+        </reference>
+    </adminhtml_container_index>
+    <adminhtml_container_edit>
+	<reference name="head">
+            <action method="addJs">
+                <file>iqnomy/backend.js</file>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="iqnomy_extension/adminhtml_container_edit" name="iqnomy.container" />
+        </reference>
+    </adminhtml_container_edit>
+    <adminhtml_container_save>
+        <reference name="content">
+            <block type="iqnomy_extension/adminhtml_container_edit" name="iqnomy.container" />
+        </reference>
+    </adminhtml_container_save>
+    
+    <adminhtml_liquidcontent_index>
+        <reference name="content">
+            <block type="iqnomy_extension/adminhtml_liquidcontent" name="iqnomy.liquidcontent" />
+        </reference>
+    </adminhtml_liquidcontent_index>
+    <adminhtml_liquidcontent_edit>
+        <reference name="content">
+            <block type="iqnomy_extension/adminhtml_liquidcontent_edit" name="iqnomy.liquidcontent" />
+        </reference>
+        <reference name="head">
+            <action method="addJs">
+                <file>iqnomy/backend.js</file>
+            </action>
+        </reference>
+    </adminhtml_liquidcontent_edit>
+    <adminhtml_liquidcontent_duplicate>
+        <reference name="content">
+            <block type="iqnomy_extension/adminhtml_liquidcontent_edit" name="iqnomy.liquidcontent" />
+        </reference>
+        <reference name="head">
+            <action method="addJs">
+                <file>iqnomy/backend.js</file>
+            </action>
+        </reference>
+    </adminhtml_liquidcontent_duplicate>
+    <adminhtml_liquidcontent_save>
+        <reference name="content">
+            <block type="iqnomy_extension/adminhtml_liquidcontent_edit" name="iqnomy.liquidcontent" />
+        </reference>
+        <reference name="head">
+            <action method="addJs">
+                <file>iqnomy/backend.js</file>
+            </action>
+        </reference>
+    </adminhtml_liquidcontent_save>
+    
+    <adminhtml_subscription_index>
+        <reference name="content">
+            <block type="iqnomy_extension/adminhtml_subscription" name="iqnomy.subscription" />
+        </reference>
+    </adminhtml_subscription_index>
+    
+    <adminhtml_banner_index>
+        <reference name="content">
+            <block type="iqnomy_extension/adminhtml_banner" name="iqnomy.banner" />
+        </reference>
+        <reference name="head">
+            <action method="addJs">
+                <file>iqnomy/backend.js</file>
+            </action>
+        </reference>
+    </adminhtml_banner_index>
+    <adminhtml_banner_edit>
+        <reference name="head">
+            <action method="addJs">
+                <file>iqnomy/backend.js</file>
+            </action>
+        </reference>
+    </adminhtml_banner_edit>
+</layout>

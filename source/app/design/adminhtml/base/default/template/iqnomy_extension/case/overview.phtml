@@ -1,0 +1,569 @@
+<?php
+/**
+ * @category    IQNOMY
+ * @package     IQNOMY_Extension
+ * @copyright   Copyright (c) 2013-2015 IQNOMY (http://www.iqnomy.com)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+?>
+<?php /** @var IQNOMY_Extension_Block_Adminhtml_Case $this */ ?>
+</script>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="<?php echo $this->getHeaderWidth() ?>"><?php echo $this->getHeaderHtml() ?></td>
+            <td class="form-buttons"><?php echo $this->getButtonsHtml() ?></td>
+        </tr>
+    </table>
+</div>
+<div id="maincontainer">    
+    <?php if($this->getCase()->getConfigureText() != null) { ?>
+        <p><?php echo $this->getCase()->getConfigureText(); ?></p>
+    <?php } ?>
+    <?php if($this->getCase()->getIsConfigurable()) { ?>
+	<?php if(!$this->getCase()->getIsNewsletterCase()) { ?>
+        <div class="entry-edit">
+            <form id="edit_form" action="<?php echo $this->getSaveUrl(); ?>" method="post" enctype="multipart/form-data">
+                <div><input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" /></div>
+                <div class="entry-edit-head"><h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('iqnomy_extension')->__("Placement"); ?></h4></div>
+                <div class="fieldset " id="impression_info">
+                    <div class="hor-scroll">
+                        <table cellspacing="0" class="form-list">
+                            <tbody>
+                                <tr>
+                                    <td class="label"><label for="is_enabled"><?php echo Mage::helper('iqnomy_extension')->__("Enabled?"); ?></label></td>
+                                    <td class="value">
+                                        <input id="is_enabled" name="is_enabled" value="1" type="checkbox" <?php if($this->getCase()->getBanner() != null && $this->getCase()->getBanner()->getIsEnabled()) { echo "checked"; } ?>>
+                                    </td>
+                                </tr>
+				<?php if($this->getCase()->getId() == 2) { ?>
+				    <tr>
+					<td class="label"><label for="use_magento_grid"><?php echo Mage::helper('iqnomy_extension')->__("Use magento grid?"); ?></label></td>
+					<td class="value">
+					    <input id="use_magento_grid" name="use_magento_grid" value="1" type="checkbox" <?php if($this->getCase()->getBanner() != null && $this->getCase()->getBanner()->getAnimationType() == 10) { echo "checked"; } ?>>
+					</td>
+				    </tr>
+				<?php } ?>
+                                <tr>
+                                    <?php if($this->ibannersEnabled() && $this->getCase()->getId() == 1) { ?>
+                                        <td class="label"><label for="html_id"><?php echo Mage::helper('iqnomy_extension')->__("iBanner group"); ?> <span class="required required-entry">*</span></label></td>
+                                        <td class="value">
+                                            <select id="html_id" name="html_id" class="required-entry required-entry select">
+                                                <option value=""></option>
+                                                <?php foreach($this->getIbannerGroups() as $iBannerGroup) { ?>
+                                                    <option value="ibanners-<?php echo $iBannerGroup->getCode(); ?>" <?php if($this->getIbannerGroupCode() == $iBannerGroup->getCode()) { echo "selected"; } ?> ><?php echo $iBannerGroup->getTitle(); ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <p class="note" id="html_id"><span><?php echo Mage::helper('iqnomy_extension')->__("Select the iBanner group which you would like to personalize."); ?></span></p>
+                                        </td>
+                                    <?php } else { ?>
+                                        <td class="label"><label for="html_id"><?php echo Mage::helper('iqnomy_extension')->__("HTML-id"); ?> <span class="required">*</span></label></td>
+                                        <td class="value">
+                                            <input id="html_id" name="html_id" value="<?php echo $this->getHtmlId(); ?>" class="required-entry input-text required-entry" type="text">
+					    <?php 
+					    echo $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
+						'label' => Mage::helper('iqnomy_extension')->__("CMS pages"),
+						'onclick' => "window.open('".$this->getUrl('*/cms_page/index')."');",
+						'style' => 'margin-left: 5px;'
+					    ))->toHtml();
+					    ?>
+                                            <p class="note" id="note_html_id"><span><?php echo Mage::helper('iqnomy_extension')->__($this->getCase()->getHtmlIdNote()); ?> <a href="http://support.iqnomy.com/index.php?title=Html-id_Magento" target="_blank"><?php echo $this->trans("More info"); ?></a></span></p>
+                                        </td>
+                                    <?php } ?>
+                                </tr>
+                                <tr>
+                                    <td class="label"><label for="name"><?php echo Mage::helper('iqnomy_extension')->__("Height"); ?> <span class="required required-entry">*</span></label></td>
+                                    <td class="value">
+                                        <input id="height" name="height" value="<?php echo $this->getHeight(); ?>" class="required-entry validate-number input-text required-entry" type="text">
+                                        <p class="note" id="note_height"><span><?php echo Mage::helper('iqnomy_extension')->__("Enter the height in pixels. This height is required to avoid screen flashes."); ?></span></p>
+                                    </td>
+                                </tr>
+				<?php if($this->getCase()->getId() == 2) { ?>
+				<tr>
+				    <td class="label"><label for="max_results"><?php echo $this->trans("Amount of results per category"); ?></label></td>
+				    <td class="value">
+					<select name="max_results" id="max_results">
+					    <?php $maxResults = $this->getMaxResults(); ?>
+					    <option value="2"<?php if($maxResults == 2) { ?> selected<?php } ?>>2</option>
+					    <option value="3"<?php if($maxResults == 3) { ?> selected<?php } ?>>3</option>
+					    <option value="4"<?php if($maxResults == 4) { ?> selected<?php } ?>>4</option>
+					    <option value="5"<?php if($maxResults == 5) { ?> selected<?php } ?>>5</option>
+					</select>
+				    </td>
+				</tr>
+				<?php } ?>
+                            </tbody>
+                        </table>
+                        <?php echo $this->getLayout()->createBlock('iqnomy_extension/adminhtml_container_edit_containerpages')->setData(array("placement_id" => $this->getPlacementId(), "containerplacements" => $this->getContainerPlacements(), "max_results" => $this->getCase()->getMaxResults()))->toHtml(); ?>
+                    </div>
+                </div>
+                <?php if($this->getCase()->getUseHtmlTemplate()) { ?>
+                    <div class="section-config" style="margin-bottom: 10px;">
+                        <div class="entry-edit-head collapseable">
+                            <a id="html-template-head" href="#" onclick="Fieldset.toggleCollapse('html-template'); return false;"><?php echo Mage::helper('iqnomy_extension')->__("HTML template"); ?></a>
+                        </div>
+                        <fieldset class="config collapseable" id="html-template" style="display: none;">
+                            <div class="hor-scroll">
+                                <table cellspacing="0" class="form-list">
+                                    <tbody>
+                                        <tr>
+                                            <td class="label"><label for="html"><?php echo Mage::helper('iqnomy_extension')->__("HTML template"); ?> <span class="required">*</span></label></td>
+                                            <td class="value">
+                                                <textarea id="html" name="html" class="required-entry required-entry textarea" style="width:700px; height:250px;" rows="2" cols="15"><?php echo $this->getCase()->getHtmlTemplate(); ?></textarea>
+						<?php
+						    $button = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
+							'label' => Mage::helper('iqnomy_extension')->__("Reset HTML"),
+							'onclick' => 'resetHtml();',
+							'style' => 'vertical-align: top; margin-left: 20px;'
+						    ));
+						    
+						    echo $button->toHtml();
+						?>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </fieldset>
+                    </div>
+                <?php } ?>
+            </form>
+            <?php if($this->getCase()->getFormType() == "slider" && $this->getCase()->getIBanners() != null) { ?>
+            <div class="entry-edit-head"><h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('iqnomy_extension')->__("Default contents"); ?></h4></div>
+            <div class="fieldset " id="default_contents">
+                <p><?php echo Mage::helper('iqnomy_extension')->__("In this list you can see the default content that you configured through the ibanner module."); ?></p>
+                <div class="grid">
+                    <div class="hor-scroll">
+                        <table cellspacing="0" class="data">
+                            <colgroup>
+                                <col>
+                                <col width="200">
+                            </colgroup>
+                            <thead>
+                                <tr class="headings">
+                                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Name"); ?></span></span></th>
+                                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Image"); ?></span></span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if($this->getCase()->getIBanners()->count() > 0) { ?>
+                                    <?php $even = true; ?>
+                                    <?php foreach($this->getCase()->getIBanners() as $row) { ?>
+                                        <tr class="<?php if($even) { echo " even"; } ?>">
+                                            <td style='min-width: 200px;'><?php echo $row->getTitle(); ?></td>
+                                            <td><a onclick="event.stopPropagation();" href="<?php echo $row->getImageUrl(); ?>" target="_blank">Link</a></td>
+                                        </tr>
+                                        <?php $even = !$even; ?>
+                                    <?php } ?>
+                                <?php } else { ?>
+                                    <tr class="even">
+                                        <td class="empty-text a-center" colspan="2"><?php echo Mage::helper('iqnomy_extension')->__("No default contents found."); ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <?php } ?>
+            <div class="entry-edit-head"><h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('iqnomy_extension')->__($this->getCase()->getLiquidContentOverviewTitle()); ?></h4></div>
+            <div class="fieldset " id="liquid_contents">
+                <?php if ($this->getCase()->getLiquidContentOverviewText() != null) { ?><p><?php echo $this->getCase()->getLiquidContentOverviewText(); ?></p><?php } ?>
+                <div class="grid">
+                    <div class="hor-scroll">
+                        <table cellspacing="0" class="data">
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col width="90">
+                                <?php if($this->getCase()->getFormType() != "slider") { ?>
+                                <col>
+                                <?php } else { ?>
+                                <col width="50">
+                                <?php } ?>
+                                <col width="200">
+                            </colgroup>
+                            <thead>
+                                <tr class="headings">
+                                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Name"); ?></span></span></th>
+                                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Areas of interest"); ?></span></span></th>
+                                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Enabled?"); ?></span></span></th>
+                                    <?php if($this->getCase()->getFormType() != "slider") { ?>
+                                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Product"); ?></span></span></th>
+                                    <?php } else { ?>
+                                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Image"); ?></span></span></th>
+                                    <?php } ?>
+                                    <th class=" no-link last"><span class="nobr"><?php echo Mage::helper('iqnomy_extension')->__("Action"); ?></span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if($this->getLiquidContents() != null && $this->getLiquidContents()->count() > 0) { ?>
+                                    <?php $even = true; ?>
+                                    <?php foreach($this->getLiquidContents() as $row) { ?>
+                                        <tr class="pointer<?php if($even) { echo " even"; } ?>" onclick="location.href = '<?php echo $this->getRowUrl($row); ?>';">
+                                            <td title="<?php echo Mage::helper('iqnomy_extension')->__($this->getCase()->getLiquidContentEdit()); ?>" style='min-width: 200px;'><?php echo $row->getName(); ?></td>
+                                            <td><?php echo $row->getPropertyList(); ?></td>
+                                            <td class="a-center" title="<?php echo Mage::helper('iqnomy_extension')->__("Click on edit to change the status."); ?>"><input type="checkbox" disabled="disabled" class="disabled" <?php if($row->getIsEnabled()) { echo "checked"; } ?>></td>
+                                            <?php if($this->getCase()->getFormType() != "slider") { ?>
+                                            <td><?php echo $row->getProductName(); ?></td>
+                                            <?php } else { ?>
+                                            <td title="<?php echo $row->getImage(); ?>"><a onclick="event.stopPropagation();" href="<?php echo $row->getImage(); ?>" target="_blank">Link</a></td>
+                                            <?php } ?>
+                                            <td title="<?php echo Mage::helper('iqnomy_extension')->__($this->getCase()->getLiquidContentEdit()); ?>" class="a-center last">
+                                                <?php if($this->getCase()->getId() != 1) { ?><a href="javascript:void();" onclick="event.stopPropagation(); openVariableOverview(<?php echo $row->getId(); ?>);"><?php echo Mage::helper('iqnomy_extension')->__("Variables"); ?></a> / <?php } ?><a href="javascript:void();" onclick="event.stopPropagation(); openPageChooser(<?php echo $row->getId(); ?>);" target="_blank">Preview</a> / <a href="<?php echo $this->getRowUrl($row); ?>"><?php echo Mage::helper('iqnomy_extension')->__("Edit"); ?></a>
+                                            </td>
+                                        </tr>
+                                        <?php $even = !$even; ?>
+                                    <?php } ?>
+                                <?php } else { ?>
+                                    <tr class="even">
+                                        <td class="empty-text a-center" colspan="5"><?php echo Mage::helper('iqnomy_extension')->__("No liquid contents found."); ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+	<?php } else { ?>
+	<div class="entry-edit">
+	    <form id="edit_form" action="<?php echo $this->getSaveUrl(); ?>" method="post" enctype="multipart/form-data">
+                <div>
+		    <input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+		    <input type="hidden" name="html_id" value="_iqContentBox" />
+		    <input type="hidden" name="height" value="100" />
+		</div>
+                <div class="entry-edit-head"><h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('iqnomy_extension')->__("General"); ?></h4></div>
+                <div class="fieldset " id="general_info">
+                    <div class="hor-scroll">
+                        <table cellspacing="0" class="form-list">
+                            <tbody>
+                                <tr>
+                                    <td class="label"><label for="is_enabled"><?php echo Mage::helper('iqnomy_extension')->__("Enabled?"); ?></label></td>
+                                    <td class="value">
+                                        <input id="is_enabled" name="is_enabled" value="1" type="checkbox" <?php if($this->getCase()->getBanner() != null && $this->getCase()->getBanner()->getIsEnabled()) { echo "checked"; } ?>>
+                                    </td>
+                                </tr>
+                                <tr>
+				    <td class="label"><label for="popup_title"><?php echo $this->trans("Pop-up title"); ?> <span class="required">*</span></label></td>
+				    <td class="value">
+					<input id="popup_title" name="popup_title" value="<?php echo $this->getCase()->getNewsletterLiquidContent()->getPopupTitle(); ?>" class="required-entry input-text required-entry" type="text">
+				    </td>
+                                </tr>
+                                <tr>
+                                    <td class="label"><label for="popup_submit_text"><?php echo $this->trans("Pop-up submit text") ?> <span class="required required-entry">*</span></label></td>
+                                    <td class="value">
+                                        <input id="popup_submit_text" name="popup_submit_text" value="<?php echo $this->getCase()->getNewsletterLiquidContent()->getPopupSubmitText(); ?>" class="required-entry validate-number input-text required-entry" type="text">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+		<div class="entry-edit-head"><h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('iqnomy_extension')->__("Image"); ?></h4></div>
+                <div class="fieldset " id="image_info">
+                    <div class="hor-scroll">
+                        <table cellspacing="0" class="form-list">
+                            <tbody>
+                                <tr style="display: none;">
+				    <td class="label"></td>
+				    <td class="value">
+					<input id="image" name="image" value="" onchange="updateImageLabel();" readonly="1" type="file">
+				    </td>
+				</tr>
+				<tr>
+				    <td colspan="2" class="hidden"><input id="existing-image" name="existing_image" value="" type="hidden"></td>
+				</tr>
+				<tr>
+				    <td class="label">
+					<label><?php echo $this->trans("Image"); ?> <span class="required required-entry">*</span></label>
+				    </td>
+				    <td class="value">
+					<div style="height: 30px;" id="image-buttons">
+					    <button style="float: left;" type="button" onclick="document.getElementById('image').click();"><?php echo $this->trans("Select image"); ?></button>
+					    <label style="float: left; margin-left: 15px;" id="current-file"></label>
+					    <?php $imageUrl = $this->getCase()->getNewsletterLiquidContent()->getUrlToImage(); ?>
+					    <?php if($imageUrl == null || $this->getCase()->getNewsletterLiquidContent()->getImagePath() == null) { ?>
+						<a target="_blank" style="display: none;"><img style="max-height: 30px; float: left; margin-left: 15px;" id="current-image"></a>
+					    <?php } else { ?>
+						<a href="<?php echo $imageUrl; ?>" target="_blank"><img style="max-height: 30px; float: left; margin-left: 15px;" id="current-image" src="<?php echo $imageUrl; ?>"></a>
+					    <?php } ?>
+					    <a target="_blank" style="display: none;">
+						<img style="max-height: 30px; float: left; margin-left: 15px;" id="current-image">
+					    </a>
+					</div>
+					<div>
+					    <p class="note">
+						<span><?php echo $this->trans("Above you can add an image that will be shown in the pop-up. It is recommended to choose an image with at least a width of 400 pixels."); ?></span>
+					    </p>
+					</div>
+				    </td>
+				</tr>
+				<tr>
+                                    <td class="label"><label for="popup_alttext"><?php echo Mage::helper('iqnomy_extension')->__("Alt text"); ?> <span class="required required-entry">*</span></label></td>
+                                    <td class="value">
+                                        <input id="popup_alttext" name="popup_alttext" value="<?php echo $this->getCase()->getNewsletterLiquidContent()->getPopupAlttext(); ?>" class="required-entry validate-number input-text required-entry" type="text">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+		<div class="entry-edit-head"><h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('iqnomy_extension')->__("Styling"); ?></h4></div>
+                <div class="fieldset " id="styling_info">
+                    <div class="hor-scroll">
+                        <table cellspacing="0" class="form-list">
+                            <tbody>
+                                <tr>
+				    <td class="label"><label for="popup_coloration"><?php echo $this->trans("Color code"); ?> <span class="required">*</span></label></td>
+				    <td class="value">
+					<input id="popup_coloration" name="popup_coloration" value="<?php echo $this->getCase()->getNewsletterLiquidContent()->getPopupColoration(); ?>" class="required-entry input-text required-entry" type="text">
+					<p class="note" id="note_coloration"><span><?php echo $this->trans("Enter the color code for the title bar, the submit button and the borders."); ?></span></p>
+				    </td>
+                                </tr>
+                                <tr>
+                                    <td class="label"><label for="popup_close_icon_color"><?php echo Mage::helper('iqnomy_extension')->__("Close button color"); ?> <span class="required required-entry">*</span></label></td>
+                                    <td class="value">
+                                        <select name="popup_close_icon_color" id="popup_close_icon_color">
+					    <?php $selectedColor = $this->getCase()->getNewsletterLiquidContent()->getPopupCloseIconColor(); ?>
+					    <option value="yellow" <?php if($selectedColor == "yellow") { ?>selected<?php } ?>><?php echo Mage::helper('iqnomy_extension')->__("Yellow"); ?></option>
+					    <option value="white" <?php if($selectedColor == "white") { ?>selected<?php } ?>><?php echo Mage::helper('iqnomy_extension')->__("White"); ?></option>
+					    <option value="red" <?php if($selectedColor == "red") { ?>selected<?php } ?>><?php echo Mage::helper('iqnomy_extension')->__("Red"); ?></option>
+					    <option value="purple" <?php if($selectedColor == "purple") { ?>selected<?php } ?>><?php echo Mage::helper('iqnomy_extension')->__("Purple"); ?></option>
+					    <option value="orange" <?php if($selectedColor == "orange") { ?>selected<?php } ?>><?php echo Mage::helper('iqnomy_extension')->__("Orange"); ?></option>
+					    <option value="grey" <?php if($selectedColor == "grey") { ?>selected<?php } ?>><?php echo Mage::helper('iqnomy_extension')->__("Grey"); ?></option>
+					    <option value="green" <?php if($selectedColor == "green") { ?>selected<?php } ?>><?php echo Mage::helper('iqnomy_extension')->__("Green"); ?></option>
+					    <option value="blue" <?php if($selectedColor == "blue") { ?>selected<?php } ?>><?php echo Mage::helper('iqnomy_extension')->__("Blue"); ?></option>
+					</select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+		<?php if($this->getCase()->getUseHtmlTemplate()) { ?>
+                    <div class="section-config" style="margin-bottom: 10px;">
+                        <div class="entry-edit-head collapseable">
+                            <a id="html-template-head" href="#" onclick="Fieldset.toggleCollapse('html-template'); return false;"><?php echo Mage::helper('iqnomy_extension')->__("HTML template"); ?></a>
+                        </div>
+                        <fieldset class="config collapseable" id="html-template" style="display: none;">
+                            <div class="hor-scroll">
+                                <table cellspacing="0" class="form-list">
+                                    <tbody>
+                                        <tr>
+                                            <td class="label"><label for="html"><?php echo Mage::helper('iqnomy_extension')->__("HTML template"); ?> <span class="required">*</span></label></td>
+                                            <td class="value">
+                                                <textarea id="html" name="html" class="required-entry required-entry textarea" style="width:700px; height:250px;" rows="2" cols="15"><?php echo $this->getCase()->getHtmlTemplate(); ?></textarea>
+						<?php
+						    $button = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
+							'label' => Mage::helper('iqnomy_extension')->__("Reset HTML"),
+							'onclick' => 'resetHtml();',
+							'style' => 'vertical-align: top; margin-left: 20px;'
+						    ));
+						    
+						    echo $button->toHtml();
+						?>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </fieldset>
+                    </div>
+                <?php } ?>
+	    </form>
+	    <div class="entry-edit-head"><h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('iqnomy_extension')->__($this->getCase()->getLiquidContentOverviewTitle()); ?></h4></div>
+	    <div class="fieldset " id="liquid_contents">
+		<div class="grid">
+		    <div class="hor-scroll">
+			<table cellspacing="0" class="data">
+			    <colgroup>
+				<col>
+				<col>
+				<col width="90">
+				<col width="200">
+			    </colgroup>
+			    <thead>
+				<tr class="headings">
+				    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Name"); ?></span></span></th>
+				    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Areas of interest"); ?></span></span></th>
+				    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Enabled?"); ?></span></span></th>
+				    <th class=" no-link last"><span class="nobr"><?php echo Mage::helper('iqnomy_extension')->__("Action"); ?></span></th>
+				</tr>
+			    </thead>
+			    <tbody>
+				<?php if($this->getLiquidContents() != null && $this->getLiquidContents()->count() > 0) { ?>
+				    <?php $even = true; ?>
+				    <?php foreach($this->getLiquidContents() as $row) { ?>
+					<tr class="pointer<?php if($even) { echo " even"; } ?>">
+					    <td title="<?php echo Mage::helper('iqnomy_extension')->__($this->getCase()->getLiquidContentEdit()); ?>" style='min-width: 200px;'><?php echo $row->getName(); ?></td>
+					    <td><?php echo $row->getPropertyList(); ?></td>
+					    <td class="a-center" title="<?php echo Mage::helper('iqnomy_extension')->__("Click on edit to change the status."); ?>"><input type="checkbox" disabled="disabled" class="disabled" <?php if($row->getIsEnabled()) { echo "checked"; } ?>></td>
+					    <td title="<?php echo Mage::helper('iqnomy_extension')->__($this->getCase()->getLiquidContentEdit()); ?>" class="a-center last">
+						<?php
+						    $newsLetterPreviewUrl = Mage::helper('iqnomy_extension')->getBaseUrl();
+						    if(strpos($newsLetterPreviewUrl, "?") !== false)
+						    {
+							$newsLetterPreviewUrl .= "&";
+						    }
+						    else
+						    {
+							$newsLetterPreviewUrl .= "?";
+						    }
+						    $newsLetterPreviewUrl .= "preview=true&placement_id=".$this->getCase()->getBanner()->getId()."&liquid_content_id=".$row->getId();
+						?>
+						<?php if($this->getCase()->getId() != 1) { ?><a href="javascript:void();" onclick="event.stopPropagation(); openVariableOverview(<?php echo $row->getId(); ?>);"><?php echo Mage::helper('iqnomy_extension')->__("Variables"); ?></a> / <?php } ?><a href="javascript:void();" onclick="event.stopPropagation(); window.open('<?php echo $newsLetterPreviewUrl; ?>');" target="_blank">Preview</a>
+					    </td>
+					</tr>
+					<?php $even = !$even; ?>
+				    <?php } ?>
+				<?php } else { ?>
+				    <tr class="even">
+					<td class="empty-text a-center" colspan="4"><?php echo Mage::helper('iqnomy_extension')->__("The case has not been saved yet."); ?></td>
+				    </tr>
+				<?php } ?>
+			    </tbody>
+			</table>
+		    </div>
+		</div>
+	    </div>
+	</div>
+	<?php } ?>
+    <?php } ?>
+</div>
+<?php if($this->getCase()->getIsConfigurable()) { ?>
+<?php 
+$button = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
+    'label' => Mage::helper('iqnomy_extension')->__("Close"),
+    'onclick' => 'closePageChooser();',
+    'class' => 'delete',
+    'style' => 'float: right; padding-top: 2px;'
+));
+?>
+<div id="page-chooser" class="entry-edit" style="display: none; position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 500; background-color: rgba(0,0,0,0.75); padding: 10%;overflow: auto;">
+    <div class="entry-edit-head">
+	<h4 class="icon-head head-edit-form fieldset-legend" style="margin-top: 2px;">Selecteer pagina</h4>
+	<?php echo $button->toHtml(); ?>
+    </div>
+    <div class="fieldset">
+	<?php if($this->getContainerPlacements() != null) { ?>
+	    <?php echo Mage::helper('iqnomy_extension')->__("Select on which page you would like to see the preview."); ?><br><br>
+	    <?php foreach($this->getContainerPlacements() as $placement) { ?>
+	    <a href="javascript:void(0);" onclick="event.stopPropagation(); previewLiquidContent('<?php echo $this->getLiquidContentPreviewUrl($placement["matchUrl"]); ?>');" target="_blank"><?php echo $placement["matchUrl"]; ?></a><br>
+	    <?php } ?>
+	<?php } else { ?><?php echo Mage::helper('iqnomy_extension')->__("At least one page should be added to the case before you can review contents."); ?><?php } ?>
+    </div>
+</div>
+
+<script type="text/javascript">
+function openPageChooser(liquidContentId)
+{
+    document.getElementById("page-chooser").style.display = "block";
+    document.getElementById("page-chooser").liquidContentId = liquidContentId;
+}
+function closePageChooser()
+{
+    document.getElementById("page-chooser").style.display = "none";
+}
+function previewLiquidContent(url)
+{
+    var liquidContentId = document.getElementById("page-chooser").liquidContentId;
+    url += liquidContentId;
+    window.open(url);
+    
+    closePageChooser();
+}
+</script>
+<?php if($this->getLiquidContents() != null && $this->getLiquidContents()->count() > 0) { ?>
+<?php foreach($this->getLiquidContents() as $liquidContent) { ?>
+<?php 
+$button = $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
+    'label' => Mage::helper('iqnomy_extension')->__("Close"),
+    'onclick' => 'closeVariableOverview('.$liquidContent->getId().');',
+    'class' => 'delete',
+    'style' => 'float: right; padding-top: 2px;'
+));
+?>
+<div id="variable-overview-<?php echo $liquidContent->getId(); ?>" class="entry-edit" style="display: none; position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 500; background-color: rgba(0,0,0,0.75); padding: 10%;overflow: auto;">
+    <div class="entry-edit-head">
+	<h4 class="icon-head head-edit-form fieldset-legend" style="margin-top: 2px;"><?php echo Mage::helper('iqnomy_extension')->__("Availible variables for product: "); ?><?php echo $liquidContent->getName(); ?></h4>
+	<?php echo $button->toHtml(); ?>
+    </div>
+    <div class="fieldset">
+	<div class="grid">
+	    <table cellspacing="0" class="data">
+		<colgroup>
+		    <col width="150">
+		    <col>
+		    <col width="150">
+		</colgroup>
+		<thead>
+		    <tr class="headings">
+			<th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Code"); ?></span></span></th>
+			<th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Template code"); ?></span></span></th>
+			<th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Value"); ?></span></span></th>
+		    </tr>
+		</thead>
+		<tbody>
+		    <?php $even = true; ?>
+		    <?php foreach($liquidContent->getVariables() as $variable) { ?>
+			<tr class="<?php if($even) { ?>even<?php } ?>">
+			    <td><?php echo $variable["code"]; ?></td>
+			    <td><?php echo $variable["template_code"]; ?></td>
+			    <td class="last"><?php echo $variable["value"]; ?></td>
+			</tr>
+			<?php $even = !$even; ?>
+		    <?php } ?>
+		</tbody>
+	    </table>
+	</div>
+    </div>
+</div>
+<?php } ?>
+<?php } ?>
+<script type="text/javascript">
+function openVariableOverview(liquidContentId)
+{
+    document.getElementById("variable-overview-" + liquidContentId).style.display = "block";
+}
+function closeVariableOverview(liquidContentId)
+{
+    document.getElementById("variable-overview-" + liquidContentId).style.display = "none";
+}
+</script>
+<script type="text/javascript">
+function updateImageLabel()
+{
+    var imageName = document.getElementById('image').value;
+    
+    while(imageName.indexOf('\/') >= 0)
+    { 
+        imageName = imageName.substring(imageName.indexOf('\/') + 1); 
+    } 
+    
+    while(imageName.indexOf('\\') >= 0)
+    {
+        imageName = imageName.substring(imageName.indexOf('\\') + 1);
+    }
+    document.getElementById('current-file').innerHTML = imageName;
+    document.getElementById('current-file').style.display = "";
+    
+    var currentImage = document.getElementById('current-image');
+    if(typeof currentImage != "undefined" && currentImage != null)
+    {
+        currentImage.parentNode.style.display = "none";
+    }
+    
+    document.getElementById("existing-image").value = "";
+}
+
+function resetHtml()
+{
+    if(confirm('<?php echo $this->trans("Are you sure you want to reset the HTML? All changes you made to it, will be reverted!"); ?>'))
+    {
+	location.href = '<?php echo $this->getResetHtmlUrl(); ?>';
+    }
+}
+</script>
+<?php } ?>

@@ -1,0 +1,63 @@
+<?php
+/**
+ * @category    IQNOMY
+ * @package     IQNOMY_Extension
+ * @copyright   Copyright (c) 2013-2015 IQNOMY (http://www.iqnomy.com)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+?>
+<div class="grid">
+    <div class="hor-scroll">
+        <table cellspacing="0" class="data">
+            <colgroup>
+                <col width="50" class="a-center">
+                <col>
+                <col width="100">
+                <col>
+                <col width="100">
+                <col width="100">
+                <col width="130">
+                <col width="130">
+                <col width="50">
+            </colgroup>
+            <thead>
+                <tr class="headings">
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Enabled?"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Name"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("HTML-id"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Container"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Height"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Animation type"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Animation duration"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Pause time"); ?></span></span></th>
+                    <th class=" no-link last"><span class="nobr"><?php echo Mage::helper('iqnomy_extension')->__("Action"); ?></span></th>
+                </tr>
+            </thead> 
+            <tbody>
+                <?php if($this->getCollection() != null && $this->getCollection()->count() > 0) { ?>
+                    <?php $even = true; ?>
+                    <?php foreach($this->getCollection() as $row) { ?>
+                        <tr title="<?php echo Mage::helper('iqnomy_extension')->__("Edit liquid internet case: ").$row->getName(); ?>" class="pointer<?php if($even) { echo " even"; } ?>" onclick="location.href = '<?php echo $this->getRowUrl($row); ?>';">
+                            <td class="a-center"><?php if($row->getIsEnabled()) { ?><input type='checkbox' disabled='disabled' class='disabled' checked><?php } else { ?><input type='checkbox' disabled='disabled' class='disabled'><?php } ?></td>
+                            <td style='min-width: 200px;'><?php echo $row->getName(); ?></td>
+                            <td><?php echo $row->getHtmlId(); ?></td>
+                            <td><?php echo $row->getContainer()->getName(); ?></td>
+                            <td><?php echo $row->getHeight()." px"; ?></td>
+                            <td><?php if($row->getAnimationType() == IQNOMY_Extension_Model_Banner::animationTypeFade) { echo Mage::helper('iqnomy_extension')->__("Fading"); } elseif($row->getAnimationType() == IQNOMY_Extension_Model_Banner::animationTypeSlide) { echo Mage::helper('iqnomy_extension')->__("Sliding"); } else { echo Mage::helper('iqnomy_extension')->__("None"); }?></td>
+                            <td><?php if($row->getAnimationType() == IQNOMY_Extension_MODEL_Banner::animationTypeNone) { echo Mage::helper('iqnomy_extension')->__("N/A"); } else { echo $row->getDuration()." ".Mage::helper('iqnomy_extension')->__("milliseconds"); } ?></td>
+                            <td><?php if($row->getAnimationType() == IQNOMY_Extension_MODEL_Banner::animationTypeNone) { echo Mage::helper('iqnomy_extension')->__("N/A"); } else { echo $row->getPause()." ".Mage::helper('iqnomy_extension')->__("milliseconds"); } ?></td>
+                            <td class="a-center last">
+                                <a href="<?php echo $this->getRowUrl($row); ?>"><?php echo Mage::helper('iqnomy_extension')->__("Edit"); ?></a>
+                            </td>
+                        </tr>
+                        <?php $even = !$even; ?>
+                    <?php } ?>
+                <?php } else { ?>
+                    <tr class="even">
+                        <td class="empty-text a-center" colspan="9"><?php echo Mage::helper('iqnomy_extension')->__("No liquid internet cases found."); ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>

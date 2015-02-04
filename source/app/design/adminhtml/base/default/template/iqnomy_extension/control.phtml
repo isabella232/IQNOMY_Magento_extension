@@ -1,0 +1,134 @@
+<?php
+/**
+ * @category    IQNOMY
+ * @package     IQNOMY_Extension
+ * @copyright   Copyright (c) 2013-2015 IQNOMY (http://www.iqnomy.com)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+?>
+<?php /** @var IQNOMY_Extension_Block_Adminhtml_Control $this */ ?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="<?php echo $this->getHeaderWidth() ?>"><?php echo $this->getHeaderHtml() ?></td>
+            <td class="form-buttons"><?php echo $this->getButtonsHtml() ?></td>
+        </tr>
+    </table>
+</div>
+<?php if($this->getConfigValid()) { ?>
+    <div id="maincontainer">
+        <div style="float: left; width: 100%;">
+            <div style="float: left">
+                <fieldset style="padding:0">
+                    <iframe style="height:150px;width:325px;margin:0;border:0;float:left;overflow:auto" src="<?php echo $this->getIframeUrl(); ?>"></iframe>
+                </fieldset>
+            </div>
+            <div style="float: left;">
+                <p style="margin-top: 8px;"><?php echo Mage::helper('iqnomy_extension')->__("Click on the synchronize button to send the product attributes to IQNOMY. IQNOMY will automatically create interest dimension."); ?></p>
+                <p><?php echo Mage::helper('iqnomy_extension')->__("To track the visitor realtime, click on the login button at the left side of this page. With Liquid Internet you boost the conversion and customer engagement."); ?></p>
+            </div>
+        </div>
+        <div style="margin-left: 8px; margin-top: 20px; float: left; width: 100%;">
+            <h3 style="margin: 0px;">Cases</h3>
+            <p><?php echo sprintf(Mage::helper('iqnomy_extension')->__("Start directly with Liquid Internet? We have create a small selection for you. Visit %s to see more Liquid Internet cases."), '<a href="http://support.iqnomy.com/index.php?title=Cases" target="_blank">IQNOMY</a>'); ?></p>
+            <div class="grid">
+                <div class="hor-scroll">
+                    <table cellspacing="0" class="data">
+                        <colgroup>
+                            <col width="250">
+                            <col>
+                            <col width="150">
+                            <col width="150">
+                            <col width="100">
+                            <col width="120">
+                        </colgroup>
+                        <thead>
+                            <tr class="headings"><!--style="background: #D6D6D6;">-->
+                                <th><?php echo Mage::helper('iqnomy_extension')->__("Case"); ?></th>
+                                <th><?php echo Mage::helper('iqnomy_extension')->__("Description"); ?></th>
+                                <th></th>
+                                <th><?php echo Mage::helper('iqnomy_extension')->__("Status"); ?></th>
+                                <th></th>
+                                <th class="no-link last"></th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            <?php if($this->getCollection() != null && $this->getCollection()->count() > 0) { ?>
+                                <?php $even = true; ?>
+                                <?php foreach($this->getCollection() as $row) { ?>
+                                    <tr class="pointer<?php if($even) { echo " even"; } ?>" onclick="location.href = '<?php echo $this->getRowUrl($row); ?>';">
+					<td><?php if($row->getStartWithUrl() != null) { ?><a href="<?php echo $row->getStartWithUrl(); ?>" target="_blank" title="<?php echo Mage::Helper('iqnomy_extension')->__("Explanation default case "); echo $row->getLabel(); ?>" onclick="event.stopPropagation();"><?php echo Mage::Helper('iqnomy_extension')->__("Start with "); ?></a><?php } ?><?php echo $row->getLabel(); ?></td>
+                                        <td title="<?php echo Mage::helper('iqnomy_extension')->__("settings of case ").$row->getLabel(); ?>"><?php echo $row->getDescription(); ?> <?php if($row->getMoreInfoUrl() != null) { ?><a  title="<?php echo Mage::helper('iqnomy_extension')->__("Best practices"); ?>" onclick="event.stopPropagation();" href="<?php echo $row->getMoreInfoUrl(); ?>" target="_blank"><?php echo Mage::helper('iqnomy_extension')->__("More info"); ?></a><?php } ?></td>
+                                        <td><?php if($row->getExampleUrl() != null) { ?><a onclick="event.stopPropagation();" href="<?php echo $row->getExampleUrl(); ?>" target="_blank"><?php echo Mage::helper('iqnomy_extension')->__("Example"); ?></a><?php } ?></td>
+                                        <td><?php echo $row->getStatus(); ?></td>
+                                        <td class="a-center"><?php echo $this->getEnableDisableUrl($row); ?></td>
+                                        <td class="a-center last">
+                                            <a href="<?php echo $this->getRowUrl($row); ?>"><?php echo Mage::helper('iqnomy_extension')->__("Setup / Edit"); ?></a>
+                                        </td>
+                                    </tr>
+                                    <?php $even = !$even; ?>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <tr class="even">
+                                    <td class="empty-text a-center" colspan="5"><?php echo Mage::helper('iqnomy_extension')->__("No cases found."); ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <h3 style="margin: 0px; margin-top: 10px;"><?php echo Mage::helper('iqnomy_extension')->__("Custom containers"); ?></h3>
+            <p><?php echo Mage::helper('iqnomy_extension')->__("Below you can see the containers which are not linked to one of the above cases."); ?></p>
+            <div class="grid">
+                <div class="hor-scroll">
+                    <table cellspacing="0" class="data">
+                        <colgroup>
+                            <col width="50">
+                            <col>
+                            <col width="90">
+                            <col width="150">
+                            <col>
+			    <col width="100">
+                            <col width="120">
+                        </colgroup>
+                        <thead>
+                            <tr class="headings">
+                                <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("ID"); ?></span></span></th>
+                                <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Name"); ?></span></span></th>
+                                <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Enabled?"); ?></span></span></th>
+                                <th title="<?php echo Mage::helper('iqnomy_extension')->__("If there is no profile of the visitor, this type will be used to select content."); ?>"><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Escalation type"); ?></span></span></th>
+                                <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Selection methods"); ?></span></span></th>
+                                <th></th>
+				<th class=" no-link last"><span class="nobr"><?php echo Mage::helper('iqnomy_extension')->__("Action"); ?></span></th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            <?php if($this->getOtherContainers() != null && $this->getOtherContainers()->count() > 0) { ?>
+                                <?php $even = true; ?>
+                                <?php foreach($this->getOtherContainers() as $row) { ?>
+                                    <tr class="pointer<?php if($even) { echo " even"; } ?>" onclick="location.href = '<?php echo $this->getContainerEditUrl($row); ?>';">
+                                        <td class="a-right"><?php echo $row->getId(); ?></td>
+                                        <td style='min-width: 200px;'><?php echo $row->getName(); ?></td>
+                                        <td class="a-center"><input type="checkbox" disabled="disabled" class="disabled" <?php if($row->getIsEnabled()) { echo "checked"; } ?>></td>
+                                        <td title="<?php echo Mage::helper('iqnomy_extension')->__("If there is no profile of the visitor, this type will be used to select content."); ?>"><?php echo $row->getFallbackTypeViewable(); ?></td>
+                                        <td><?php echo $row->getSelectionMethodsViewable(); ?></td>
+					<td class="a-center"><?php echo $this->getEnableDisableUrlContainer($row); ?></td>
+                                        <td class="a-center last">
+					    <a href="<?php echo $this->getContainerLiquidContentOverviewUrl($row); ?>"><?php echo Mage::helper('iqnomy_extension')->__("Contents"); ?></a> / 
+                                            <a href="<?php echo $this->getContainerEditUrl($row); ?>"><?php echo Mage::helper('iqnomy_extension')->__("Edit"); ?></a>
+                                        </td>
+                                    </tr>
+                                    <?php $even = !$even; ?>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <tr class="even">
+                                    <td class="empty-text a-center" colspan="7"><?php echo Mage::helper('iqnomy_extension')->__("No containers found."); ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>

@@ -1,0 +1,46 @@
+<?php
+/**
+ * @category    IQNOMY
+ * @package     IQNOMY_Extension
+ * @copyright   Copyright (c) 2013-2015 IQNOMY (http://www.iqnomy.com)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+?>
+<div id="maincontainer">
+    <?php echo Mage::helper('iqnomy_extension')->__("In the table you can see all the newsletter subscribers which subscribed through the IQNOMY pop-up. These subscriptions also can be found at 'Newsletter > Newsletter subscriptions'."); ?>
+</div>
+<div class="grid">
+    <div class="hor-scroll">
+        <table cellspacing="0" class="data">
+            <colgroup>
+                <col>
+                <col width="150">
+                <col width="200">
+            </colgroup>
+            <thead>
+                <tr class="headings">
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("E-mail"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Status"); ?></span></span></th>
+                    <th><span class="nobr last"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Hash"); ?></span></span></th>
+                </tr>
+            </thead> 
+            <tbody>
+                <?php if($this->getCollection() != null && $this->getCollection()->count() > 0) { ?>
+                    <?php $even = true; ?>
+                    <?php foreach($this->getCollection() as $row) { ?>
+                        <tr class="<?php if($even) { echo "even"; } ?>">
+                            <td><?php echo $row->getEmail(); ?></td>
+                            <td><?php echo $row->getStatus(); ?></td>
+                            <td class="last"><?php echo $row->getHash(); ?></td>
+                        </tr>
+                        <?php $even = !$even; ?>
+                    <?php } ?>
+                <?php } else { ?>
+                    <tr class="even">
+                        <td class="empty-text a-center" colspan="7"><?php echo Mage::helper('iqnomy_extension')->__("No subscribers found."); ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>

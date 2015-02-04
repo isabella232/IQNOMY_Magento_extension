@@ -1,0 +1,60 @@
+<?php
+/**
+ * @category    IQNOMY
+ * @package     IQNOMY_Extension
+ * @copyright   Copyright (c) 2013-2015 IQNOMY (http://www.iqnomy.com)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+?>
+<div class="grid">
+    <div class="hor-scroll">
+        <table cellspacing="0" class="data">
+            <colgroup>
+                <col width="50">
+                <col>
+                <col>
+                <col>
+                <col width="90">
+                <col>
+                <col width="50">
+                <col width="130">
+            </colgroup>
+            <thead>
+                <tr class="headings">
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("ID"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Container"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Name"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Areas of interest"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Enabled?"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Product"); ?></span></span></th>
+                    <th><span class="nobr"><span class="sort-title"><?php echo Mage::helper('iqnomy_extension')->__("Image"); ?></span></span></th>
+                    <th class=" no-link last"><span class="nobr"><?php echo Mage::helper('iqnomy_extension')->__("Action"); ?></span></th>
+                </tr>
+            </thead> 
+            <tbody>
+                <?php if($this->getCollection() != null && $this->getCollection()->count() > 0) { ?>
+                    <?php $even = true; ?>
+                    <?php foreach($this->getCollection() as $row) { ?>
+                        <tr title="<?php echo Mage::helper('iqnomy_extension')->__("Edit liquid content: ").$row->getName(); ?>" class="pointer<?php if($even) { echo " even"; } ?>" onclick="location.href = '<?php echo $this->getRowUrl($row); ?>';">
+                            <td class="a-right"><?php echo $row->getId(); ?></td>
+                            <td style='min-width: 200px;'><?php echo $row->getContainer()->getName(); ?></td>
+                            <td style='min-width: 200px;'><?php echo $row->getName(); ?></td>
+                            <td><?php echo $row->getPropertyList(); ?></td>
+                            <td class="a-center"><input type="checkbox" disabled="disabled" class="disabled" <?php if($row->getIsEnabled()) { echo "checked"; } ?>></td>
+                            <td><?php echo $row->getProductName(); ?></td>
+                            <td><a onclick="event.stopPropagation();" href="<?php echo $row->getImage(); ?>" target="_blank">Link</a></td>
+                            <td class="a-center last">
+                                <a href="<?php echo $this->getDuplicateUrl($row); ?>"><?php echo Mage::helper('iqnomy_extension')->__("Copy"); ?></a> / <a href="<?php echo $this->getRowUrl($row); ?>"><?php echo Mage::helper('iqnomy_extension')->__("Edit"); ?></a>
+                            </td>
+                        </tr>
+                        <?php $even = !$even; ?>
+                    <?php } ?>
+                <?php } else { ?>
+                    <tr class="even">
+                        <td class="empty-text a-center" colspan="8"><?php echo Mage::helper('iqnomy_extension')->__("No liquid contents found."); ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>

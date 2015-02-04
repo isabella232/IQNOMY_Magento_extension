@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @category    IQNOMY
+ * @package     IQNOMY_Extension
+ * @copyright   Copyright (c) 2013-2015 IQNOMY (http://www.iqnomy.com)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+-->
+<config>
+    <modules>
+        <IQNOMY_Extension>
+            <active>true</active>
+            <codePool>community</codePool>
+        </IQNOMY_Extension>
+    </modules>
+</config>

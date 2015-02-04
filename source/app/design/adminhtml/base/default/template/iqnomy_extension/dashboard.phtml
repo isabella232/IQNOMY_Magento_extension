@@ -1,0 +1,16 @@
+<?php
+/**
+ * @category    IQNOMY
+ * @package     IQNOMY_Extension
+ * @copyright   Copyright (c) 2013-2015 IQNOMY (http://www.iqnomy.com)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+?>
+<?php if($this->getConfigValid()) { ?>
+<div class="entry-edit">
+    <div class="entry-edit-head"><h4><?php echo Mage::helper('iqnomy_extension')->__('IQNOMY Dashboard') ?></h4></div>
+    <fieldset style="padding:0">
+        <iframe style="height:150px;width:100%;margin:0;border:0;float:left;overflow:auto" src="<?php echo $this->getIframeUrl() ?>"></iframe>
+    </fieldset>
+</div>
+<?php } ?>

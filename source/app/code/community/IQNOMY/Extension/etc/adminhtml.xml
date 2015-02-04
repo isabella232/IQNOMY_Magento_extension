@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    IQNOMY
+ * @package     IQNOMY_Extension
+ * @copyright   Copyright (c) 2013-2015 IQNOMY (http://www.iqnomy.com)
+ * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+-->
+<config>
+    <menu>
+        <iqnomy>
+            <title>IQNOMY</title>
+            <sort_order>50</sort_order>
+            <children>
+                <iqnomy_extension1 translate="title">
+                    <title>Extension</title>
+                    <sort_order>90</sort_order>
+                    <action>adminhtml/iqnomy</action>
+                </iqnomy_extension1>
+                <iqnomy_extension5>
+                    <title>Subscribers</title>
+                    <sort_order>94</sort_order>
+                    <action>adminhtml/subscription</action>
+                </iqnomy_extension5>
+            </children>
+        </iqnomy>
+        <system>
+            <children>
+                <iqnomy translate="title" module="iqnomy_extension">
+                    <title>IQNOMY</title>
+                    <children>
+                        <iqnomy_extension2 translate="title">
+                            <title>Containers</title>
+                            <sort_order>91</sort_order>
+                            <action>adminhtml/container</action>
+                        </iqnomy_extension2>
+                        <iqnomy_extension4 translate="title">
+                            <title>Liquid contents</title>
+                            <sort_order>93</sort_order>
+                            <action>adminhtml/liquidcontent</action>
+                        </iqnomy_extension4>
+                    </children>
+                </iqnomy>
+            </children>
+        </system>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <iqnomy>
+			<title>IQNOMY</title>
+			<sort_order>50</sort_order>
+			<children>
+			    <iqnomy_extension1 translate="title">
+				<title>Extension</title>
+				<sort_order>90</sort_order>
+			    </iqnomy_extension1>
+			    <iqnomy_extension5>
+				<title>Subscribers</title>
+				<sort_order>94</sort_order>
+			    </iqnomy_extension5>
+			</children>
+		    </iqnomy>
+                    <system>
+                        <children>
+			    <iqnomy translate="title" module="iqnomy_extension">
+				<title>IQNOMY</title>
+				<children>
+				    <iqnomy_extension2 translate="title">
+					<title>Containers</title>
+					<sort_order>91</sort_order>
+				    </iqnomy_extension2>
+				    <iqnomy_extension4 translate="title">
+					<title>Liquid contents</title>
+					<sort_order>93</sort_order>
+				    </iqnomy_extension4>
+				</children>
+			    </iqnomy>
+                            <config>
+                                <children>
+                                    <iqnomy_extension translate="title" module="iqnomy_extension">
+                                        <title>IQNOMY Extension</title>
+                                        <sort_order>200</sort_order>
+                                    </iqnomy_extension>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
