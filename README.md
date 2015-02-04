@@ -1,6 +1,6 @@
 # IQNOMY Magento extension
 
-A Magento extension integrates IQNOMY's Liquid platform into Magento
+This Magento extension integrates IQNOMY's Liquid platform into Magento
 
 Features
 --------
