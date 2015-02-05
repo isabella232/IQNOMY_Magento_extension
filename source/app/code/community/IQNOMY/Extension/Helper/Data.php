@@ -100,6 +100,7 @@ class IQNOMY_Extension_Helper_Data extends Mage_Core_Helper_Abstract
             {
                 $array[$key] = $this->encode($value);
             }
+            return $array;
         }
         else
         {
