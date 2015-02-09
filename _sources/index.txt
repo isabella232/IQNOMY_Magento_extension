@@ -12,7 +12,7 @@ Contents:
    :maxdepth: 2
 
    includeme
-
+   gettingstarted
 
 Indices and tables
 ==================
