@@ -21,17 +21,22 @@ Installation
 Contribute
 ==========
 
-- Issue Tracker: github.com/christianvriens/IQNOMY_Magento_extension/issues
-- Source Code: github.com/christianvriens/IQNOMY_Magento_extension/
+- Issue Tracker: see issues_
+- Source Code: see source_
 
 Support
 =======
 
 If you are having issues, please let us know.
-support@iqnomy.com
-- `Getting started <http://support.iqnomy.com/index.php?title=IQNOMY_Magento_extension>`_
+
+* support@iqnomy.com 
+* documentation_ 
 
 License
 =======
 
 The project is licensed under the MIT license.
+
+.. _issues: http://github.com/christianvriens/IQNOMY_Magento_extension/issues
+.. _source: http://github.com/christianvriens/IQNOMY_Magento_extension/
+.. _documentation: http://christianvriens.github.io/IQNOMY_Magento_extension
