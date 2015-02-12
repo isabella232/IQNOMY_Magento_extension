@@ -1,7 +1,7 @@
 ###############
 Getting Started
 ###############
-
+.. _magentogettingstarted:
 
 Installing
 ==========
