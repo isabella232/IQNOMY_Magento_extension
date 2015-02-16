@@ -2,7 +2,7 @@
 IQNOMY Magento extension
 ########################
 
-This Magento extension integrates IQNOMY's Liquid platform into Magento
+This Magento extension integrates Magento with the `IQNOMY platform`_
 
 Features
 ========
@@ -40,3 +40,4 @@ The project is licensed under the MIT license.
 .. _issues: http://github.com/christianvriens/IQNOMY_Magento_extension/issues
 .. _source: http://github.com/christianvriens/IQNOMY_Magento_extension/
 .. _documentation: http://christianvriens.github.io/IQNOMY_Magento_extension
+.. _IQNOMY platform: http://www.iqnomy.com
