@@ -13,8 +13,8 @@ Contents:
 
    includeme
    gettingstarted
-   administrator
-   developer
+   administrators
+   developers
 
 Indices and tables
 ==================

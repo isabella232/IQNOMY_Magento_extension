@@ -2,17 +2,14 @@
 Administrators
 ##############
 
+.. contents::
+
 ************
 Introduction
 ************
-The Magento extension is available in the Magento administration. On the dashboard you will find the IQNOMY logo with a link to your IQNOMY account.
+You can manage your installed extension from the Magento administration. On the dashboard you will find the IQNOMY logo with a link to your IQNOMY account.
 
 .. image:: _static/images/dashboard_magento.png
-
-* :ref:`Standard cases <standard_cases>`
-* :ref:`Configuration`
-* :ref:`Custom liquid internet <custom>`
-* :ref:`Upgrade / Install <install>`
 
 .. _standard_cases:
 
