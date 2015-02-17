@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Developers &mdash; IQNOMY Magento extension 0.8.18 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="IQNOMY Magento extension 0.8.18 documentation" href="index.html"/>
+        <link rel="prev" title="Administrators" href="administrators.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> IQNOMY Magento extension</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="includeme.html">IQNOMY Magento extension</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="includeme.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="includeme.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="includeme.html#contribute">Contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="includeme.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="includeme.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#installing">Installing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#download">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#module-installation">Module installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#module-configuration">Module configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#synchronisation-dimensions">Synchronisation dimensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#tracking">Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettingstarted.html#building-a-profile">Building a profile</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="administrators.html">Administrators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="administrators.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administrators.html#standard-cases">Standard cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administrators.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administrators.html#custom-liquid-internet">Custom liquid internet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administrators.html#magento-connect">Magento Connect</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#management-iqnomy-account">Management IQNOMY account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#webshop-visitors">Webshop visitors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extension-structure">Extension structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">IQNOMY Magento extension</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Developers</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/developers.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="developers">
+<h1><a class="toc-backref" href="#id1">Developers</a><a class="headerlink" href="#developers" title="Permalink to this headline">¶</a></h1>
+<p>The extension has multiple connections with the IQNOMY platform through REST en browser javascript. The <strong>main functionalities</strong> of the extension are:</p>
+<ol class="arabic simple">
+<li>Managing your IQNOMY account</li>
+<li>Tracking and webshop visitors</li>
+</ol>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#developers" id="id1">Developers</a><ul>
+<li><a class="reference internal" href="#management-iqnomy-account" id="id2">Management IQNOMY account</a><ul>
+<li><a class="reference internal" href="#connection-info" id="id3">Connection info</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#webshop-visitors" id="id4">Webshop visitors</a><ul>
+<li><a class="reference internal" href="#tracking-data" id="id5">Tracking data</a></li>
+<li><a class="reference internal" href="#personalization" id="id6">Personalization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#extension-structure" id="id7">Extension structure</a></li>
+<li><a class="reference internal" href="#troubleshooting" id="id8">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#logging" id="id9">Logging</a></li>
+<li><a class="reference internal" href="#ftp-configuration" id="id10">FTP configuration</a></li>
+<li><a class="reference internal" href="#error-after-installing" id="id11">Error after installing</a></li>
+<li><a class="reference internal" href="#maintenance-mode" id="id12">Maintenance mode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="management-iqnomy-account">
+<h2><a class="toc-backref" href="#id2">Management IQNOMY account</a><a class="headerlink" href="#management-iqnomy-account" title="Permalink to this headline">¶</a></h2>
+<p>From the extension you can configure part of your IQNOMY account.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="administrators.html"><em>Administrators</em></a></p>
+</div>
+<div class="section" id="connection-info">
+<h3><a class="toc-backref" href="#id3">Connection info</a><a class="headerlink" href="#connection-info" title="Permalink to this headline">¶</a></h3>
+<p>The API information can be found in the IQNOMY platform. You need this to connect the extension with the IQNOMY platform.</p>
+</div>
+</div>
+<div class="section" id="webshop-visitors">
+<h2><a class="toc-backref" href="#id4">Webshop visitors</a><a class="headerlink" href="#webshop-visitors" title="Permalink to this headline">¶</a></h2>
+<p>The IQNOMY script is automaticly installed with the extension.</p>
+<div class="section" id="tracking-data">
+<h3><a class="toc-backref" href="#id5">Tracking data</a><a class="headerlink" href="#tracking-data" title="Permalink to this headline">¶</a></h3>
+<p>Every page in the frontend will enclose the standard IQNOMY script just before the closing &lt;/body&gt; tag. This standard IQNOMY script will track all the normal pageviews through a Javascript. Next to these page views the following events will be tracked.</p>
+<p>Through a REST api (iqeventdata value is between &#8216;( )&#8217; ):</p>
+<ul class="simple">
+<li>If a visitor registers a new account (account=register)</li>
+<li>If a visitor logs in (account=login)</li>
+<li>If a visitor subscribes for a newsletter (newsletter=true)</li>
+<li>If a visitor posts a contact form (contactform=true)</li>
+<li>If a visitor changes the content of a shopping cart (cart_changed=true, subtotal=&lt;bedrag&gt;, orderrows=[{product_id:&lt;id&gt;,quantity:&lt;aantal&gt;,price:&lt;bedrag&gt;}, ...])</li>
+<li>If a visitor does a checkout of the order (checkout=true)</li>
+</ul>
+<p>Through JavaScript (during page-load, _iqsEventData value between &#8216;( )&#8217;  ):</p>
+<ul class="simple">
+<li>If a visitor visits the homepage (page_type=home)</li>
+<li>If a visitor visits a CMS page  (page_type=info)</li>
+<li>If a visitor visits a category page (page_type=overview, category_id=&lt;id&gt;)</li>
+<li>If a visitor visits a product detail page (page_type=detail, product_id=&lt;id&gt;, category_id=&lt;id&gt;, &lt;dimension&gt;=&lt;value&gt;, ...)</li>
+<li>If a visitor visits the shopping cart  (page_type=shoppingcart)</li>
+<li>If a visitor visits the order page  (page_type=checkout)</li>
+<li>If a visitor visits the search result page (page_type=search, search=&lt;zoekterm&gt;)</li>
+<li>If a visitor visits the wish list (page_type=wishlist, products=[{product_id:&lt;id&gt;,category_id:&lt;id&gt;,&lt;dimension&gt;:&lt;value&gt;,...}])</li>
+<li>If a visitor visits the product comparison  (page_type=compare, products=[{product_id:&lt;id&gt;,category_id:&lt;id&gt;,&lt;dimension&gt;:&lt;value&gt;,...}])</li>
+</ul>
+<p>Through JavaScript (after visitor action, through trackEvent functie):</p>
+<ul class="simple">
+<li>If a visitor on product detail page clicks the tab Product properties (details=attributes)</li>
+<li>If a visitor on product detail page clicks the tab Reviews (details=reviews)</li>
+<li>If the filters on a category page are used by a visitor  (filter=true, &lt;dimension&gt;=&lt;value&gt;, …)</li>
+<li>If the sorting on the category page is used  (order=&lt;dimension&gt;, direction=asc/desc)</li>
+</ul>
+</div>
+<div class="section" id="personalization">
+<h3><a class="toc-backref" href="#id6">Personalization</a><a class="headerlink" href="#personalization" title="Permalink to this headline">¶</a></h3>
+<p>With the management part of the extension the personalization can be configured. An administrator can also configure the personalisation directly in the IQNOMY platform.</p>
+<p>With every track that is performed the IQNOMY platform will check if the URL the visitor is on also needs personalization. If this is the case IQNOMY will inject the HTML in the Magento webshop.</p>
+</div>
+</div>
+<div class="section" id="extension-structure">
+<h2><a class="toc-backref" href="#id7">Extension structure</a><a class="headerlink" href="#extension-structure" title="Permalink to this headline">¶</a></h2>
+<p>61 directories, 82 files</p>
+<div class="highlight-text"><div class="highlight"><pre>├── app
+│   ├── code
+│   │   └── community
+│   │       └── IQNOMY
+│   │           └── Extension
+│   │               ├── Block
+│   │               │   ├── Adminhtml
+│   │               │   │   ├── Banner
+│   │               │   │   │   ├── Edit
+│   │               │   │   │   │   └── Form.php
+│   │               │   │   │   ├── Edit.php
+│   │               │   │   │   └── Grid.php
+│   │               │   │   ├── Banner.php
+│   │               │   │   ├── Case.php
+│   │               │   │   ├── Container
+│   │               │   │   │   ├── Edit
+│   │               │   │   │   │   ├── Containerpages.php
+│   │               │   │   │   │   └── Form.php
+│   │               │   │   │   ├── Edit.php
+│   │               │   │   │   └── Grid.php
+│   │               │   │   ├── Container.php
+│   │               │   │   ├── Control.php
+│   │               │   │   ├── Dashboard
+│   │               │   │   │   ├── Iqnomy.php
+│   │               │   │   │   └── Sales.php
+│   │               │   │   ├── Liquidcontent
+│   │               │   │   │   ├── Chooser.php
+│   │               │   │   │   ├── Edit
+│   │               │   │   │   │   ├── Advanced.php
+│   │               │   │   │   │   ├── Form.php
+│   │               │   │   │   │   ├── Product.php
+│   │               │   │   │   │   ├── Renderer
+│   │               │   │   │   │   │   └── Button.php
+│   │               │   │   │   │   └── Slider.php
+│   │               │   │   │   ├── Edit.php
+│   │               │   │   │   ├── Grid.php
+│   │               │   │   │   └── Image
+│   │               │   │   │       └── Chooser.php
+│   │               │   │   ├── Liquidcontent.php
+│   │               │   │   ├── Subscription
+│   │               │   │   │   └── Grid.php
+│   │               │   │   ├── Subscription.php
+│   │               │   │   └── System
+│   │               │   │       └── Config
+│   │               │   │           └── Form
+│   │               │   │               ├── Field
+│   │               │   │               │   ├── Dimensions
+│   │               │   │               │   │   └── Product.php
+│   │               │   │               │   └── Dimensions.php
+│   │               │   │               └── Fieldset
+│   │               │   │                   └── Versioninfo.php
+│   │               │   ├── Banner.php
+│   │               │   ├── Html.php
+│   │               │   └── Tracker.php
+│   │               ├── controllers
+│   │               │   ├── Adminhtml
+│   │               │   │   ├── BannerController.php
+│   │               │   │   ├── CaseController.php
+│   │               │   │   ├── ContainerController.php
+│   │               │   │   ├── IqnomyController.php
+│   │               │   │   ├── LiquidcontentController.php
+│   │               │   │   └── SubscriptionController.php
+│   │               │   └── ProductController.php
+│   │               ├── etc
+│   │               │   ├── adminhtml.xml
+│   │               │   ├── config.xml
+│   │               │   └── system.xml
+│   │               ├── Helper
+│   │               │   └── Data.php
+│   │               ├── Model
+│   │               │   ├── Adminhtml
+│   │               │   │   └── System
+│   │               │   │       └── Config
+│   │               │   │           └── Source
+│   │               │   │               ├── Category
+│   │               │   │               │   └── Level.php
+│   │               │   │               ├── Dimensions
+│   │               │   │               │   └── Product.php
+│   │               │   │               ├── Dimensions.php
+│   │               │   │               └── Environment.php
+│   │               │   ├── Banner.php
+│   │               │   ├── Case.php
+│   │               │   ├── Container.php
+│   │               │   ├── IQNOMYbanner.php
+│   │               │   ├── Liquidcontent.php
+│   │               │   ├── Product.php
+│   │               │   ├── Resource
+│   │               │   │   ├── Banner
+│   │               │   │   │   └── Collection.php
+│   │               │   │   ├── Banner.php
+│   │               │   │   ├── Mysql4
+│   │               │   │   │   └── Setup.php
+│   │               │   │   ├── Subscription
+│   │               │   │   │   └── Collection.php
+│   │               │   │   ├── Subscription.php
+│   │               │   │   ├── Template
+│   │               │   │   │   └── Collection.php
+│   │               │   │   └── Template.php
+│   │               │   ├── Subscription.php
+│   │               │   ├── Sync
+│   │               │   │   └── Observer.php
+│   │               │   ├── Template.php
+│   │               │   ├── Tracker.php
+│   │               │   └── Webservice.php
+│   │               └── sql
+│   │                   └── IQNOMY_setup
+│   │                       └── install-0.8.12.php
+│   ├── design
+│   │   └── adminhtml
+│   │       └── base
+│   │           └── default
+│   │               ├── layout
+│   │               │   └── iqnomy_extension.xml
+│   │               └── template
+│   │                   └── iqnomy_extension
+│   │                       ├── banner
+│   │                       │   └── grid.phtml
+│   │                       ├── case
+│   │                       │   └── overview.phtml
+│   │                       ├── container
+│   │                       │   ├── grid.phtml
+│   │                       │   └── pages.phtml
+│   │                       ├── control.phtml
+│   │                       ├── dashboard.phtml
+│   │                       ├── liquidcontent
+│   │                       │   └── grid.phtml
+│   │                       ├── store
+│   │                       │   └── switcher.phtml
+│   │                       └── subscription
+│   │                           └── grid.phtml
+│   ├── etc
+│   │   └── modules
+│   │       └── IQNOMY_Extension.xml
+│   └── locale
+│       └── nl_NL
+│           └── IQNOMY_Extension.csv
+├── js
+│   └── iqnomy
+│       ├── backend.js
+│       ├── IQBanner.js
+│       ├── IQJquery.js
+│       └── iqnomy.js
+└── package.xml
+</pre></div>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2><a class="toc-backref" href="#id8">Troubleshooting</a><a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="logging">
+<h3><a class="toc-backref" href="#id9">Logging</a><a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h3>
+<p>If there are any problems you can set with in the connector configuration &#8216;Enable Logging&#8217; to &#8216;Yes&#8217;. All API-calls will be logged in the var/log/iqnomy.log. This can be handy for a developer in case of troubleshooting</p>
+</div>
+<div class="section" id="ftp-configuration">
+<h3><a class="toc-backref" href="#id10">FTP configuration</a><a class="headerlink" href="#ftp-configuration" title="Permalink to this headline">¶</a></h3>
+<p>If this is your first Magento plugin, maybe you have to set the ftp upload to install the plugin.</p>
+<img alt="_images/SettingsFTPMagento1.png" src="_images/SettingsFTPMagento1.png" />
+<img alt="_images/SettingsFTPMagento2.png" src="_images/SettingsFTPMagento2.png" />
+<img alt="_images/SettingsFTPMagento3.png" src="_images/SettingsFTPMagento3.png" />
+<img alt="_images/SettingsFTPMagento4.png" src="_images/SettingsFTPMagento4.png" />
+<img alt="_images/SettingsFTPMagento5.png" src="_images/SettingsFTPMagento5.png" />
+<img alt="_images/SettingsFTPMagento6.png" src="_images/SettingsFTPMagento6.png" />
+</div>
+<div class="section" id="error-after-installing">
+<h3><a class="toc-backref" href="#id11">Error after installing</a><a class="headerlink" href="#error-after-installing" title="Permalink to this headline">¶</a></h3>
+<p>Just logout and login again in your Magento administration.</p>
+<img alt="_images/SettingsErrorMagento1.png" src="_images/SettingsErrorMagento1.png" />
+<img alt="_images/SettingsErrorMagento2.png" src="_images/SettingsErrorMagento2.png" />
+</div>
+<div class="section" id="maintenance-mode">
+<h3><a class="toc-backref" href="#id12">Maintenance mode</a><a class="headerlink" href="#maintenance-mode" title="Permalink to this headline">¶</a></h3>
+<p>This has happened when installing the plugin twice or the installation process was interrupted.
+* Unflag the maintenance mode
+* Clear var/cache</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="administrators.html" class="btn btn-neutral" title="Administrators"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Christian Vriens.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.8.18',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

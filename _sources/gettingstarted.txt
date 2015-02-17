@@ -51,7 +51,7 @@ You can find your IQNOMY ID and Webservice key in your IQNOMY account in Discove
 .. image:: ./_static/images/SettingsInstallMagento7.png
 .. image:: ./_static/images/SettingsInstallMagento8.png
 
-You can set the usable [[Dimensions|dimensions]]. Standard configuration are all product attributes where 'Visible in frontend'  or 'Used in comparison' is set.
+You can set the usable dimensions. Standard configuration are all product attributes where 'Visible in frontend'  or 'Used in comparison' is set.
 
 These dimensions will be send to IQNOMY when a visitor is visiting a for example a product page. Also all options from select and multiselect attributes will be send to IQNOMY when the attribute is saved in the backend. 
 
@@ -78,38 +78,61 @@ The properties (attribute properties) will be send as a key/value to IQNOMY. So 
 Tracking
 ========
 
-Every page in the frontend will enclose the standard IQNOMY script just before the closing </body> tag. This standard IQNOMY script will track all the normal pageviews through a Javascript. Next to these page views the following events will be tracked. 
-
-Through a REST api (iqeventdata value is between '( )' ): 
-
-* If a visitor registers a new account (account=register)
-* If a visitor logs in (account=login)
-* If a visitor subscribes for a newsletter (newsletter=true)
-* If a visitor posts a contact form (contactform=true)
-* If a visitor changes the content of a shopping cart (cart_changed=true, subtotal=<bedrag>, orderrows=[{product_id:<id>,quantity:<aantal>,price:<bedrag>}, ...])
-* If a visitor does a checkout of the order (checkout=true)
-
-Through JavaScript (during page-load, _iqsEventData value between '( )'  ):
-
-* If a visitor visits the homepage (page_type=home)
-* If a visitor visits a CMS page  (page_type=info)
-* If a visitor visits a category page (page_type=overview, category_id=<id>)
-* If a visitor visits a product detail page (page_type=detail, product_id=<id>, category_id=<id>, <dimension>=<value>, ...)
-* If a visitor visits the shopping cart  (page_type=shoppingcart)
-* If a visitor visits the order page  (page_type=checkout)
-* If a visitor visits the search result page (page_type=search, search=<zoekterm>)
-* If a visitor visits the wish list (page_type=wishlist, products=[{product_id:<id>,category_id:<id>,<dimension>:<value>,...}])
-* If a visitor visits the product comparison  (page_type=compare, products=[{product_id:<id>,category_id:<id>,<dimension>:<value>,...}])
-
-Through JavaScript (after visitor action, through trackEvent functie):
-
-* If a visitor on product detail page clicks the tab Product properties (details=attributes)
-* If a visitor on product detail page clicks the tab Reviews (details=reviews)
-* If the filters on a category page are used by a visitor  (filter=true, <dimension>=<value>, …)
-* If the sorting on the category page is used  (order=<dimension>, direction=asc/desc)
+To see if the visitor tracking is working you can login your IQNOMY account and check the livestream. The livestream will show you the data of visitors that comes in.
 
 .. image:: ./_static/images/SettingsInstallMagento15.png
 .. image:: ./_static/images/SettingsInstallMagento16.png
+
+The tracking is sending data about an event (pagevisit, search, ordering, etc) to the IQNOMY platform. The following events are being captured:
+In the livestream above you can see that every event contains data. With the extension we have defined what kind of data IQNOMY will receive from the extension.
+
+Below you can see the possible event values. Custom event values can also be created by website developer.
+
+Magento event values
+--------------------
+
+* account	=register
+* account	=login
+* newsletter	=true
+* contactform	=true
+* cart_changed	=true
+* subtotal	={amount}
+* checkout	=true
+* page_type	=home
+* page_type	=info
+* page_type	=overview
+* page_type	=detail
+* page_type	=shoppingcart
+* page_type	=checkout
+* page_type	=search
+* page_type	=wishlist
+* page_type	=compare
+* details	=attributes
+* details	=reviews
+* filter	=true
+* search	={*text* visitor types}
+* {product attributes} = {value}
+
+.. note::
+   Examples product attributes:
+
+   * color = green
+   * size = L
+   * available = true
+
+* orderrows	={{order},{order}}
+* category_id	={category_id}
+* product_id	={product_id}
+* quantity	={quantity}
+* price	={amount}
+
+.. note::
+   All the values between {} are variables. Depending on the visitor, product or page this value will change
+
+Building a profile
+==================
+Based on all the events we receive from a visitor IQNOMY will automaticly create a profile. The event data is being used to create a higher level profile. We call this *Dimensions*.
+
 
 .. _create your account: http://www.iqnomy.com/nl/tarieven
 .. _partners: http://campus.iqnomy.com/partners 

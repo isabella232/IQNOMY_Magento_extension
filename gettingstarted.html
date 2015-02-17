@@ -29,6 +29,7 @@
 
   
     <link rel="top" title="IQNOMY Magento extension 0.8.18 documentation" href="index.html"/>
+        <link rel="next" title="Administrators" href="administrators.html"/>
         <link rel="prev" title="IQNOMY Magento extension" href="includeme.html"/> 
 
   
@@ -72,6 +73,22 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-configuration">Module configuration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#synchronisation-dimensions">Synchronisation dimensions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tracking">Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-a-profile">Building a profile</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="administrators.html">Administrators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="administrators.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administrators.html#standard-cases">Standard cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administrators.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administrators.html#custom-liquid-internet">Custom liquid internet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administrators.html#magento-connect">Magento Connect</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developers.html">Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developers.html#management-iqnomy-account">Management IQNOMY account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developers.html#webshop-visitors">Webshop visitors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developers.html#extension-structure">Extension structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developers.html#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
 </ul>
@@ -152,7 +169,7 @@ If you are going to install the IQNOMY Magento extension, please know what you a
 <img alt="_images/SettingsInstallMagento6.png" src="_images/SettingsInstallMagento6.png" />
 <img alt="_images/SettingsInstallMagento7.png" src="_images/SettingsInstallMagento7.png" />
 <img alt="_images/SettingsInstallMagento8.png" src="_images/SettingsInstallMagento8.png" />
-<p>You can set the usable [[Dimensions|dimensions]]. Standard configuration are all product attributes where &#8216;Visible in frontend&#8217;  or &#8216;Used in comparison&#8217; is set.</p>
+<p>You can set the usable dimensions. Standard configuration are all product attributes where &#8216;Visible in frontend&#8217;  or &#8216;Used in comparison&#8217; is set.</p>
 <p>These dimensions will be send to IQNOMY when a visitor is visiting a for example a product page. Also all options from select and multiselect attributes will be send to IQNOMY when the attribute is saved in the backend.</p>
 <p>After you have changed the dimension that have to be used you have to synchronize again. This is not an automatic process.</p>
 <img alt="_images/SettingsInstallMagento9.png" src="_images/SettingsInstallMagento9.png" />
@@ -173,37 +190,62 @@ If you are going to install the IQNOMY Magento extension, please know what you a
 </div>
 <div class="section" id="tracking">
 <h2>Tracking<a class="headerlink" href="#tracking" title="Permalink to this headline">¶</a></h2>
-<p>Every page in the frontend will enclose the standard IQNOMY script just before the closing &lt;/body&gt; tag. This standard IQNOMY script will track all the normal pageviews through a Javascript. Next to these page views the following events will be tracked.</p>
-<p>Through a REST api (iqeventdata value is between &#8216;( )&#8217; ):</p>
-<ul class="simple">
-<li>If a visitor registers a new account (account=register)</li>
-<li>If a visitor logs in (account=login)</li>
-<li>If a visitor subscribes for a newsletter (newsletter=true)</li>
-<li>If a visitor posts a contact form (contactform=true)</li>
-<li>If a visitor changes the content of a shopping cart (cart_changed=true, subtotal=&lt;bedrag&gt;, orderrows=[{product_id:&lt;id&gt;,quantity:&lt;aantal&gt;,price:&lt;bedrag&gt;}, ...])</li>
-<li>If a visitor does a checkout of the order (checkout=true)</li>
-</ul>
-<p>Through JavaScript (during page-load, _iqsEventData value between &#8216;( )&#8217;  ):</p>
-<ul class="simple">
-<li>If a visitor visits the homepage (page_type=home)</li>
-<li>If a visitor visits a CMS page  (page_type=info)</li>
-<li>If a visitor visits a category page (page_type=overview, category_id=&lt;id&gt;)</li>
-<li>If a visitor visits a product detail page (page_type=detail, product_id=&lt;id&gt;, category_id=&lt;id&gt;, &lt;dimension&gt;=&lt;value&gt;, ...)</li>
-<li>If a visitor visits the shopping cart  (page_type=shoppingcart)</li>
-<li>If a visitor visits the order page  (page_type=checkout)</li>
-<li>If a visitor visits the search result page (page_type=search, search=&lt;zoekterm&gt;)</li>
-<li>If a visitor visits the wish list (page_type=wishlist, products=[{product_id:&lt;id&gt;,category_id:&lt;id&gt;,&lt;dimension&gt;:&lt;value&gt;,...}])</li>
-<li>If a visitor visits the product comparison  (page_type=compare, products=[{product_id:&lt;id&gt;,category_id:&lt;id&gt;,&lt;dimension&gt;:&lt;value&gt;,...}])</li>
-</ul>
-<p>Through JavaScript (after visitor action, through trackEvent functie):</p>
-<ul class="simple">
-<li>If a visitor on product detail page clicks the tab Product properties (details=attributes)</li>
-<li>If a visitor on product detail page clicks the tab Reviews (details=reviews)</li>
-<li>If the filters on a category page are used by a visitor  (filter=true, &lt;dimension&gt;=&lt;value&gt;, …)</li>
-<li>If the sorting on the category page is used  (order=&lt;dimension&gt;, direction=asc/desc)</li>
-</ul>
+<p>To see if the visitor tracking is working you can login your IQNOMY account and check the livestream. The livestream will show you the data of visitors that comes in.</p>
 <img alt="_images/SettingsInstallMagento15.png" src="_images/SettingsInstallMagento15.png" />
 <img alt="_images/SettingsInstallMagento16.png" src="_images/SettingsInstallMagento16.png" />
+<p>The tracking is sending data about an event (pagevisit, search, ordering, etc) to the IQNOMY platform. The following events are being captured:
+In the livestream above you can see that every event contains data. With the extension we have defined what kind of data IQNOMY will receive from the extension.</p>
+<p>Below you can see the possible event values. Custom event values can also be created by website developer.</p>
+<div class="section" id="magento-event-values">
+<h3>Magento event values<a class="headerlink" href="#magento-event-values" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>account       =register</li>
+<li>account       =login</li>
+<li>newsletter    =true</li>
+<li>contactform   =true</li>
+<li>cart_changed  =true</li>
+<li>subtotal      ={amount}</li>
+<li>checkout      =true</li>
+<li>page_type     =home</li>
+<li>page_type     =info</li>
+<li>page_type     =overview</li>
+<li>page_type     =detail</li>
+<li>page_type     =shoppingcart</li>
+<li>page_type     =checkout</li>
+<li>page_type     =search</li>
+<li>page_type     =wishlist</li>
+<li>page_type     =compare</li>
+<li>details       =attributes</li>
+<li>details       =reviews</li>
+<li>filter        =true</li>
+<li>search        ={<em>text</em> visitor types}</li>
+<li>{product attributes} = {value}</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Examples product attributes:</p>
+<ul class="last simple">
+<li>color = green</li>
+<li>size = L</li>
+<li>available = true</li>
+</ul>
+</div>
+<ul class="simple">
+<li>orderrows     ={{order},{order}}</li>
+<li>category_id   ={category_id}</li>
+<li>product_id    ={product_id}</li>
+<li>quantity      ={quantity}</li>
+<li>price ={amount}</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All the values between {} are variables. Depending on the visitor, product or page this value will change</p>
+</div>
+</div>
+</div>
+<div class="section" id="building-a-profile">
+<h2>Building a profile<a class="headerlink" href="#building-a-profile" title="Permalink to this headline">¶</a></h2>
+<p>Based on all the events we receive from a visitor IQNOMY will automaticly create a profile. The event data is being used to create a higher level profile. We call this <em>Dimensions</em>.</p>
 </div>
 </div>
 
@@ -212,6 +254,8 @@ If you are going to install the IQNOMY Magento extension, please know what you a
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="administrators.html" class="btn btn-neutral float-right" title="Administrators"/>Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="includeme.html" class="btn btn-neutral" title="IQNOMY Magento extension"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -1,0 +1,25 @@
+@startuml
+
+[Client browser]
+[Magento server]
+[IQNOMY platform]
+
+HTTPS - [IQNOMY platform]
+HTTP - [Magento server]
+HTTPs - [IQNOMY platform]
+[Magento server] ..> HTTPS
+[Client browser] ..> HTTPs
+[Client browser] ..> HTTP
+
+note left of HTTPS
+  Sync product attributes
+  Management personalisation
+  Set extension version info
+end note
+
+note right of [IQNOMY platform]
+  Build visitor profile
+  Send personalisation to client
+end note
+
+@enduml
