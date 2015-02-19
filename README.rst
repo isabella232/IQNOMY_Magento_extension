@@ -37,7 +37,7 @@ License
 
 The project is licensed under the MIT license.
 
-.. _issues: http://github.com/christianvriens/IQNOMY_Magento_extension/issues
-.. _source: http://github.com/christianvriens/IQNOMY_Magento_extension/
-.. _documentation: http://christianvriens.github.io/IQNOMY_Magento_extension
+.. _issues: http://github.com/iqnomy/IQNOMY_Magento_extension/issues
+.. _source: http://github.com/iqnomy/IQNOMY_Magento_extension/
+.. _documentation: http://iqnomy.github.io/IQNOMY_Magento_extension
 .. _IQNOMY platform: http://www.iqnomy.com
