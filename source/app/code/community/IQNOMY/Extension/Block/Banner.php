@@ -7,19 +7,6 @@
  */
 class IQNOMY_Extension_Block_Banner extends Mage_Core_Block_Abstract
 {   
-    /**
-     * @return Mage_Core_Block_Abstract
-     */
-    public function _prepareLayout()
-    {
-        /** @var Mage_Page_Block_Html_Head $headBlock */
-        if ($headBlock = $this->getLayout()->getBlock('head')) {
-            $headBlock->addJs('iqnomy/IQJquery.js');
-            $headBlock->addJs('iqnomy/IQBanner.js');
-        }
-        return $this;
-    }
-    
     protected function _toHtml()
     {
         $html = "";
