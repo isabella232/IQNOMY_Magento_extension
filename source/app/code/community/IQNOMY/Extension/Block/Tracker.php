@@ -36,7 +36,8 @@ class IQNOMY_Extension_Block_Tracker extends Mage_Core_Block_Abstract
         $environment = Mage::getStoreConfig('iqnomy_extension/account/environment');
         $tenantId    = Mage::getStoreConfig('iqnomy_extension/account/tenant_id');
         $enableTenantScript = Mage::getStoreConfig('iqnomy_extension/account/tenant_script') ? 'true' : 'false';
-		$enableCustomContainers = true;
+		$enableCustomContainers = Mage::getStoreConfig('iqnomy_extension/account/custom_containers');	
+
         if (!array_key_exists($environment, $this->_hostAndPort) || empty($tenantId)) {
             return '';
         }
